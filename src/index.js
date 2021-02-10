@@ -3,10 +3,27 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from 'react-router-dom'; // ルーティングに必要なRouterコンポーネントをimport
+import { createStore } from 'redux';
+import rootReducers from './reducers';
+import { Provider } from 'react-redux';
+
+const store = createStore(
+  rootReducers,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() // devツール表示のための記述。
+);
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      {/*
+      Routerは子要素に一つのコンポーネントしか受け付けないので、
+      基本的に一番親のコンポーネントを囲むように設置。
+      */}
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
