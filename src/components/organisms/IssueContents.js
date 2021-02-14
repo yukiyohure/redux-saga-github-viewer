@@ -64,7 +64,7 @@ const IssueContents = ({
     e.stopPropagation();
     if (checkedIssueIdList.includes(id)) {
       // checkされていた場合
-      setCheckedIssueIdList(checkedIssueIdList.filter((item) => item != id));
+      setCheckedIssueIdList(checkedIssueIdList.filter((item) => item !== id));
     } else {
       // checkされていなかった場合
       setCheckedIssueIdList([...checkedIssueIdList, id]);

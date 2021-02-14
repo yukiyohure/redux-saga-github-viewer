@@ -52,7 +52,7 @@ const issueReducer = (state = initialState, action) => {
       // 配列でissueのデータを持っているので、
       newData[
         newData.findIndex((item) => {
-          return item.id == action.payload.id;
+          return item.id === action.payload.id;
         })
       ] = { ...action.payload };
       return { ...state, data: [...newData] };
