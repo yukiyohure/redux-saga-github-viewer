@@ -7,6 +7,10 @@ export const DELETE_ISSUE = "DELETE_ISSUE";
 export const SHOW_MODAL = "SHOW_MODAL";
 export const HIDE_MODAL = "HIDE_MODAL";
 
+// saga
+export const REQUEST_ISSUE = "REQUEST_ISSUE";
+export const RECIEVE_ISSUE = "RECIEVE_ISSUE";
+
 export const addIssue = (newData) => {
   return {
     type: ADD_ISSUE,
@@ -40,3 +44,17 @@ export const hideModal = () => {
     type: HIDE_MODAL,
   };
 };
+
+export const requestIssue = () => {
+  return {
+    type: REQUEST_ISSUE,
+  };
+}
+
+export const receiveIssue = (data) => {
+  return {
+    type: RECIEVE_ISSUE,
+    data: data,
+  }
+}
+

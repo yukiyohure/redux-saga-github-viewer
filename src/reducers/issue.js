@@ -1,38 +1,10 @@
-import { ADD_ISSUE, EDIT_ISSUE, DELETE_ISSUE } from "../actions";
+import { ADD_ISSUE, EDIT_ISSUE, DELETE_ISSUE, RECIEVE_ISSUE } from "../actions";
 
-const mockData = [
-  {
-    id: 1,
-    title: "A bug in Top Page",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    status: "Open",
-    author: "yuki",
-    createdAt: "01-01-2021",
-    updatedAt: "01-01-2021",
-  },
-  {
-    id: 2,
-    title: "A problem of performance in Top Page",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    status: "Open",
-    author: "yuki",
-    createdAt: "01-01-2021",
-    updatedAt: "01-01-2021",
-  },
-  {
-    id: 3,
-    title: "fix layout",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    status: "Open",
-    author: "yuki",
-    createdAt: "01-01-2021",
-    updatedAt: "01-01-2021",
-  },
-];
+const issueData = [];
 
 const initialState = {
-  index: mockData.length, // dataの長さ ≒ dataのidの値
-  data: mockData, // data自体
+  index: issueData.length, // dataの長さ ≒ dataのidの値
+  data: issueData, // data自体
 };
 
 const issueReducer = (state = initialState, action) => {
@@ -61,6 +33,8 @@ const issueReducer = (state = initialState, action) => {
         ...state,
         data: newData.filter((item) => item.id !== action.payload.id),
       };
+    case RECIEVE_ISSUE:
+      return action.data;
     default:
       return state;
   }
