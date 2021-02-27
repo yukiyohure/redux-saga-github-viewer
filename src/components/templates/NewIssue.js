@@ -51,9 +51,9 @@ const Footer = styled.div`
 
 const NewIssue = ({ hideModal, addIssue, profile }) => {
   const [issueTitle, setIssueTitle] = useState("");
-  const [issueDescription, setIssueDescription] = useState("");
+  const [issuebody, setIssuebody] = useState("");
   // 表示するためのエラーメッセージオブジェクト。keyにあるだけの文が潜在的なエラー分の全て。
-  const [errors, setErrors] = useState({ title: "", description: "" });
+  const [errors, setErrors] = useState({ title: "", body: "" });
 
   const now = getFormatedDate(new Date());
 
@@ -63,20 +63,20 @@ const NewIssue = ({ hideModal, addIssue, profile }) => {
       issueTitle,
       "タイトルを入力してください"
     );
-    const descriptionError = validateRequired(
-      issueDescription,
+    const bodyError = validateRequired(
+      issuebody,
       "説明を入力してください"
     );
 
     // エラーがあった場合は早期リターンでdispatchさせない
-    if (titleError || descriptionError) {
-      setErrors({ title: titleError, description: descriptionError });
+    if (titleError || bodyError) {
+      setErrors({ title: titleError, body: bodyError });
       return;
     }
 
     const payload = {
       title: issueTitle,
-      description: issueDescription,
+      body: issuebody,
       status: "Open",
       author: profile.userName,
       createdAt: now,
@@ -101,14 +101,14 @@ const NewIssue = ({ hideModal, addIssue, profile }) => {
           <FieldLabel>説明</FieldLabel>
           <TextArea
             placeholder="説明を入力してください"
-            onChange={setIssueDescription}
+            onChange={setIssuebody}
           />
         </Field>
       </InputSection>
       <MessageContainer>
         {errors.title && <ErrorMessage message={errors.title}></ErrorMessage>}
-        {errors.description && (
-          <ErrorMessage message={errors.description}></ErrorMessage>
+        {errors.body && (
+          <ErrorMessage message={errors.body}></ErrorMessage>
         )}
       </MessageContainer>
       <Footer>

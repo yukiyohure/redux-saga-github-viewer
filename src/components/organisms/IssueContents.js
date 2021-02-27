@@ -48,7 +48,7 @@ const IssueContents = ({
   isCheckedAllCheckbox,
   setIsCheckedAllCheckbox,
 }) => {
-  const allIdList = issueData.map((item) => item.id);
+  const allIdList = issueData?.map((item) => item.id);
 
   const onClickAllCheckbox = () => {
     setIsCheckedAllCheckbox((prevState) => {
@@ -91,7 +91,7 @@ const IssueContents = ({
           </TableRow>
         </thead>
         <tbody>
-          {issueData.length ? (
+          {issueData?.length ? (
             issueData.map((row) => {
               return (
                 <TableRow

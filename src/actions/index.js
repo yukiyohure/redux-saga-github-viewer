@@ -8,8 +8,10 @@ export const SHOW_MODAL = "SHOW_MODAL";
 export const HIDE_MODAL = "HIDE_MODAL";
 
 // saga
-export const REQUEST_ISSUE = "REQUEST_ISSUE";
-export const RECIEVE_ISSUE = "RECIEVE_ISSUE";
+export const FETCH_ISSUE_REQUEST = "FETCH_ISSUE_REQUEST";
+export const FETCH_ISSUE_SUCCEEDED = "FETCH_ISSUE_SUCCEEDED";
+export const FETCH_ISSUE_FAILED = "FETCH_ISSUE_FAILED";
+
 
 export const addIssue = (newData) => {
   return {
@@ -45,16 +47,16 @@ export const hideModal = () => {
   };
 };
 
-export const requestIssue = () => {
+export const requestedIssue = () => {
   return {
-    type: REQUEST_ISSUE,
+    type: FETCH_ISSUE_REQUEST,
   };
 }
 
-export const receiveIssue = (data) => {
+export const requestIssueSuccess = (data) => {
   return {
-    type: RECIEVE_ISSUE,
+    type: FETCH_ISSUE_SUCCEEDED,
     data: data,
-  }
+  };
 }
 

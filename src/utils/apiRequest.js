@@ -1,39 +1,26 @@
-// import { axios } from "axios";
+import axios from "axios";
 
-const mockData = [
-  {
-    id: 1,
-    title: "A bug in Top Page",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    status: "Open",
-    author: "yuki",
-    createdAt: "01-01-2021",
-    updatedAt: "01-01-2021",
-  },
-  {
-    id: 2,
-    title: "A problem of performance in Top Page",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    status: "Open",
-    author: "yuki",
-    createdAt: "01-01-2021",
-    updatedAt: "01-01-2021",
-  },
-  {
-    id: 3,
-    title: "fix layout",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    status: "Open",
-    author: "yuki",
-    createdAt: "01-01-2021",
-    updatedAt: "01-01-2021",
-  },
-];
+const username = process.env.REACT_APP_USERNAME;
+const token = process.env.REACT_APP_GITHUB_ACCESS_TOKEN;
+const repo = process.env.REACT_APP_GITHUB_REPO;
 
-export const fetchIssueData = async () => {
+console.log(username);
+
+// axiosインスタンスを作成することで毎回引数に設定情報を渡さなくて良くなる
+const axiosInstance = axios.create({
+  baseURL: "https://api.github.com",
+  auth: {
+    username: username,
+    password: token,
+  },
+});
+
+export const fetchIssueData = async (params) => {
   try {
-    const data = new Promise(res => mockData);
-    return data;
+    const response = await axiosInstance.get(`/repos/${username}/${repo}/issues`, {
+      params,
+    });
+    return response.data;
   } catch(e) {
     console.log(e);
   }

@@ -7,16 +7,18 @@ import { BrowserRouter } from 'react-router-dom'; // ルーティングに必要
 import { createStore, applyMiddleware } from 'redux';
 import rootReducers from './reducers';
 import { Provider } from 'react-redux';
+import { composeWithDevTools } from "redux-devtools-extension";
 
 import createSagaMiddleWare from "redux-saga";
-import rootSaga from "./saga";
+import rootSaga from "./sagas";
 
 const sagaMiddleWare = createSagaMiddleWare();
 
 const store = createStore(
   rootReducers,
-  applyMiddleware(sagaMiddleWare),
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() // devツール表示のための記述。
+  composeWithDevTools(
+    applyMiddleware(sagaMiddleWare),
+  )
 );
 
 sagaMiddleWare.run(rootSaga);

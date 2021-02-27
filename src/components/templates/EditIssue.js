@@ -52,8 +52,8 @@ const Footer = styled.div`
 const EditIssue = ({ issue, hideModal, editIssue }) => {
   const [issueState, setIssueState] = useState(issue.status);
   const [issueTitle, setIssueTitle] = useState(issue.title);
-  const [issueDescription, setIssueDescription] = useState(issue.description);
-  const [errors, setErrors] = useState({ title: "", description: "" });
+  const [issuebody, setIssuebody] = useState(issue.body);
+  const [errors, setErrors] = useState({ title: "", body: "" });
 
   const now = getFormatedDate(new Date());
 
@@ -66,13 +66,13 @@ const EditIssue = ({ issue, hideModal, editIssue }) => {
       issueTitle,
       "タイトルを入力してください"
     );
-    const descriptionError = validateRequired(
-      issueDescription,
+    const bodyError = validateRequired(
+      issuebody,
       "説明を入力してください"
     );
 
-    if (titleError || descriptionError) {
-      setErrors({ title: titleError, description: descriptionError });
+    if (titleError || bodyError) {
+      setErrors({ title: titleError, body: bodyError });
       return;
     }
 
@@ -80,7 +80,7 @@ const EditIssue = ({ issue, hideModal, editIssue }) => {
       ...issue,
       title: issueTitle,
       status: issueState,
-      description: issueDescription,
+      body: issuebody,
       updatedAt: now,
     };
     editIssue(payload);
@@ -103,8 +103,8 @@ const EditIssue = ({ issue, hideModal, editIssue }) => {
           <FieldLabel>説明</FieldLabel>
           <TextArea
             placeholder="説明を入力してください"
-            value={issueDescription}
-            onChange={setIssueDescription}
+            value={issuebody}
+            onChange={setIssuebody}
           />
         </Field>
         <Field>
@@ -116,8 +116,8 @@ const EditIssue = ({ issue, hideModal, editIssue }) => {
       </InputSection>
       <MessageContainer>
         {errors.title && <ErrorMessage message={errors.title}></ErrorMessage>}
-        {errors.description && (
-          <ErrorMessage message={errors.description}></ErrorMessage>
+        {errors.body && (
+          <ErrorMessage message={errors.body}></ErrorMessage>
         )}
       </MessageContainer>
       <Footer>

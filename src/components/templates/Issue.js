@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchBar from "../organisms/SearchBar";
 import styled from "styled-components";
 import IssueContents from "../organisms/IssueContents";
@@ -17,16 +17,20 @@ const Issue = ({
   deleteIssue,
   showModal,
   hideModal,
+  requestedIssue,
 }) => {
   // searchBarとIssueContentsのコンポーネントで扱うstateなので親であるIssueで管理してあげる
   const [searchWord, setSearchWord] = useState("");
   // このcheckBoxの状態も、searchBarのdeleteボタンとIssueContentのcheckBoxの2つの子コンポーネントで使用するのでここで管理
   const [checkedIssueIdList, setCheckedIssueIdList] = useState([]);
   const [isCheckedAllCheckbox, setIsCheckedAllCheckbox] = useState(false);
-
-  const filterdIssueData = issueData.filter((item) => {
+  const filterdIssueData = issueData?.filter((item) => {
     return item.title.includes(searchWord);
   });
+
+  useEffect(() => {
+    requestedIssue();
+  }, []);
 
   return (
     <Wrapper>
