@@ -30,7 +30,7 @@ const Issue = ({
 
   useEffect(() => {
     requestedIssue();
-  }, []);
+  }, [requestedIssue]);
 
   return (
     <Wrapper>

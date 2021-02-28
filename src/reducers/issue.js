@@ -1,4 +1,9 @@
-import { ADD_ISSUE, EDIT_ISSUE, DELETE_ISSUE, FETCH_ISSUE_SUCCEEDED } from "../actions";
+import {
+  ADD_ISSUE,
+  EDIT_ISSUE,
+  DELETE_ISSUE,
+  FETCH_ISSUE_SUCCEEDED,
+} from "../actions";
 
 const issueData = [];
 
@@ -9,7 +14,6 @@ const initialState = {
 
 const issueReducer = (state = initialState, action) => {
   const { index, data } = state; // 現在のdataのindex(要素の数)とdata(要素データ自体)を代入。
-  console.log(action);
   // newIndex: 新しいstateのindexキーの中身
   // newData: 新しいstateのdataキーの中身
   const newIndex = index + 1; // indexに1を加算して'ISSUEADD'で追加する要素のためのindexを用意する。

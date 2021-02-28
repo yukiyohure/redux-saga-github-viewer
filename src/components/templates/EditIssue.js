@@ -50,7 +50,7 @@ const Footer = styled.div`
 `;
 
 const EditIssue = ({ issue, hideModal, editIssue }) => {
-  const [issueState, setIssueState] = useState(issue.status);
+  const [issueState, setIssueState] = useState(issue.state);
   const [issueTitle, setIssueTitle] = useState(issue.title);
   const [issuebody, setIssuebody] = useState(issue.body);
   const [errors, setErrors] = useState({ title: "", body: "" });
@@ -66,10 +66,7 @@ const EditIssue = ({ issue, hideModal, editIssue }) => {
       issueTitle,
       "タイトルを入力してください"
     );
-    const bodyError = validateRequired(
-      issuebody,
-      "説明を入力してください"
-    );
+    const bodyError = validateRequired(issuebody, "説明を入力してください");
 
     if (titleError || bodyError) {
       setErrors({ title: titleError, body: bodyError });
@@ -109,16 +106,14 @@ const EditIssue = ({ issue, hideModal, editIssue }) => {
         </Field>
         <Field>
           <select value={issueState} onChange={onChangeStatus}>
-            <option value="Open">Open</option>
-            <option value="Close">Close</option>
+            <option value="open">Open</option>
+            <option value="closed">Closed</option>
           </select>
         </Field>
       </InputSection>
       <MessageContainer>
         {errors.title && <ErrorMessage message={errors.title}></ErrorMessage>}
-        {errors.body && (
-          <ErrorMessage message={errors.body}></ErrorMessage>
-        )}
+        {errors.body && <ErrorMessage message={errors.body}></ErrorMessage>}
       </MessageContainer>
       <Footer>
         <Button styleType="primary" label="更新" onClick={onSubmit} />

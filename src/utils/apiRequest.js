@@ -4,8 +4,6 @@ const username = process.env.REACT_APP_USERNAME;
 const token = process.env.REACT_APP_GITHUB_ACCESS_TOKEN;
 const repo = process.env.REACT_APP_GITHUB_REPO;
 
-console.log(username);
-
 // axiosインスタンスを作成することで毎回引数に設定情報を渡さなくて良くなる
 const axiosInstance = axios.create({
   baseURL: "https://api.github.com",
@@ -17,11 +15,14 @@ const axiosInstance = axios.create({
 
 export const fetchIssueData = async (params) => {
   try {
-    const response = await axiosInstance.get(`/repos/${username}/${repo}/issues`, {
-      params,
-    });
+    const response = await axiosInstance.get(
+      `/repos/${username}/${repo}/issues?`,
+      {
+        params,
+      }
+    );
     return response.data;
-  } catch(e) {
+  } catch (e) {
     console.log(e);
   }
 };

@@ -17,7 +17,7 @@ const ContentWrapper = styled.div`
 
 function App() {
   return (
-    <Router basename="/redux-github-viewer">
+    <Router basename="/redux-saga-github-viewer">
       <div>
         <ModalWrapper />
         <GlobalStyle />
