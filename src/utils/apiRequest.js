@@ -16,11 +16,20 @@ const axiosInstance = axios.create({
 export const fetchIssueData = async (params) => {
   try {
     const response = await axiosInstance.get(
-      `/repos/${username}/${repo}/issues?`,
+      `/repos/${username}/${repo}/issues`,
       {
         params,
       }
     );
+    return response.data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const fetchUser = async () => {
+  try {
+    const response = await axiosInstance.get("/user");
     return response.data;
   } catch (e) {
     console.log(e);

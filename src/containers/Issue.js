@@ -4,7 +4,7 @@ import {
   deleteIssue,
   hideModal,
   showModal,
-  requestedIssue,
+  requestIssue,
 } from "../actions";
 import { connect } from "react-redux";
 import Issue from "../components/templates/Issue";
@@ -38,8 +38,8 @@ const mapDispatchToProps = (dispatch) => {
     hideModal: () => {
       dispatch(hideModal());
     },
-    requestedIssue: () => {
-      dispatch(requestedIssue());
+    requestIssue: () => {
+      dispatch(requestIssue());
     },
   };
 };

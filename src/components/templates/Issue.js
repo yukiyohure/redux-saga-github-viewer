@@ -17,7 +17,7 @@ const Issue = ({
   deleteIssue,
   showModal,
   hideModal,
-  requestedIssue,
+  requestIssue,
 }) => {
   // searchBarとIssueContentsのコンポーネントで扱うstateなので親であるIssueで管理してあげる
   const [searchWord, setSearchWord] = useState("");
@@ -29,8 +29,8 @@ const Issue = ({
   });
 
   useEffect(() => {
-    requestedIssue();
-  }, [requestedIssue]);
+    requestIssue();
+  }, [requestIssue]);
 
   return (
     <Wrapper>

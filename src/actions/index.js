@@ -7,11 +7,13 @@ export const DELETE_ISSUE = "DELETE_ISSUE";
 export const SHOW_MODAL = "SHOW_MODAL";
 export const HIDE_MODAL = "HIDE_MODAL";
 
-// saga
+// manipulate data from api
 export const FETCH_ISSUE_REQUEST = "FETCH_ISSUE_REQUEST";
 export const FETCH_ISSUE_SUCCEEDED = "FETCH_ISSUE_SUCCEEDED";
 export const FETCH_ISSUE_FAILED = "FETCH_ISSUE_FAILED";
-
+export const FETCH_USER_REQUEST = "FETCH_USER_REQUEST";
+export const FETCH_USER_SUCCEEDED = "FETCH_USER_SUCCEEDED";
+export const FETCH_USER_FAILED = "FETCH_USER_FAILED";
 
 export const addIssue = (newData) => {
   return {
@@ -30,7 +32,7 @@ export const editIssue = (newData) => {
 export const deleteIssue = (id) => {
   return {
     type: DELETE_ISSUE,
-    payload: {id},
+    payload: { id },
   };
 };
 
@@ -47,16 +49,42 @@ export const hideModal = () => {
   };
 };
 
-export const requestedIssue = () => {
+export const requestIssue = () => {
   return {
     type: FETCH_ISSUE_REQUEST,
   };
-}
+};
 
 export const requestIssueSuccess = (data) => {
   return {
     type: FETCH_ISSUE_SUCCEEDED,
     data: data,
   };
-}
+};
 
+export const requestIssueFailed = (error) => {
+  return {
+    type: FETCH_ISSUE_FAILED,
+    error: error,
+  };
+};
+
+export const requestUser = () => {
+  return {
+    type: FETCH_USER_REQUEST,
+  };
+};
+
+export const requestUserSuccess = (data) => {
+  return {
+    type: FETCH_USER_SUCCEEDED,
+    data: data,
+  };
+};
+
+export const requestUserFailed = (error) => {
+  return {
+    type: FETCH_USER_FAILED,
+    error: error,
+  };
+};

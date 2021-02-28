@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { colors } from "../variables";
 import PropTypes from "prop-types";
@@ -27,13 +27,24 @@ const Label = styled.label`
 const ProfileItem = styled.p`
   padding: 1rem 0;
   font-size: 1.2rem;
+  img {
+    max-width: 70%;
+    max-height: 70%;
+  }
 `;
 
 const ProfileWrapper = styled.div`
   padding: 1rem;
 `;
 
-const Profile = ({ user }) => {
+const Profile = ({ user, requestUser }) => {
+  useEffect(() => {
+    requestUser();
+  }, [requestUser]);
+
+  const userData = user.data;
+  // Profileページでリロードされるとpromiseから返ってくるのを待たずに値を参照しようとしてundifined→エラーになる
+  // ので、optional chaining で値がまだ入っていない時はundefinedのままで、エラーが発生しないようにする。
   return (
     <ProfileWrapper>
       <h1>Profile</h1>
@@ -41,17 +52,35 @@ const Profile = ({ user }) => {
         <ProfilePicture>
           <Label>プロフィール</Label>
           <ProfileItem>
-            <img src={user.profileUrl} alt="profile" />
+            <img src={userData?.avatar_url} alt="profile" />
           </ProfileItem>
         </ProfilePicture>
         <ProfileInformation>
           <div>
             <Label>ユーザー名</Label>
-            <ProfileItem>{user.userName}</ProfileItem>
+            <ProfileItem>{userData?.name}</ProfileItem>
           </div>
           <div>
-            <Label>メールアドレス</Label>
-            <ProfileItem>{user.email}</ProfileItem>
+            <Label>アカウントURL</Label>
+            <ProfileItem>
+              <a target="_blank" rel="noreferrer" href={userData?.html_url}>{userData?.html_url}</a>
+            </ProfileItem>
+          </div>
+          <div>
+            <Label>フォロー数</Label>
+            <ProfileItem>{userData?.following}</ProfileItem>
+          </div>
+          <div>
+            <Label>フォロワー数</Label>
+            <ProfileItem>{userData?.followers}</ProfileItem>
+          </div>
+          <div>
+            <Label>パブリックレポジトリ数</Label>
+            <ProfileItem>{userData?.public_repos}</ProfileItem>
+          </div>
+          <div>
+            <Label>プライベートリポジトリ数</Label>
+            <ProfileItem>{userData?.owned_private_repos}</ProfileItem>
           </div>
         </ProfileInformation>
       </ProfileContainer>
