@@ -28,9 +28,13 @@ const Issue = ({
     return item.title.includes(searchWord);
   });
 
+  // requestedIssue自体がuseEffectの外の変数なので、requestedIssueの追加でeslintから警告が出る
   useEffect(() => {
+    // requestIssue()を実行すると、stateが変更されるので、
+    // requestIssue()→state更新→requestIssue()→state更新...のように無限ループが発生してしまう。
+    // その対策としてuseEffectを使ってコンポーネントのマウント時一度だけ呼ぶようにする。
     requestIssue();
-  }, [requestIssue]);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Wrapper>
