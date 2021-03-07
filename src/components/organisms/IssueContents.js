@@ -42,7 +42,7 @@ const IssueContents = ({
   issueData,
   showModal,
   hideModal,
-  editIssue,
+  updateIssue,
   checkedIssueIdList,
   setCheckedIssueIdList,
   isCheckedAllCheckbox,
@@ -102,7 +102,7 @@ const IssueContents = ({
                         <EditIssue
                           issue={row}
                           hideModal={hideModal}
-                          editIssue={editIssue}
+                          updateIssue={updateIssue}
                         />
                       ),
                     })
@@ -139,7 +139,7 @@ IssueContents.propTypes = {
   issueData: PropTypes.array,
   showModal: PropTypes.func,
   hideModal: PropTypes.func,
-  editIssue: PropTypes.func,
+  updateIssue: PropTypes.func,
   checkedIssueIdList: PropTypes.array,
   setCheckedIssueIdList: PropTypes.func,
   isCheckedAllCheckbox: PropTypes.bool,

@@ -13,7 +13,7 @@ const Issue = ({
   issueData,
   profile,
   createIssue,
-  editIssue,
+  updateIssue,
   deleteIssue,
   showModal,
   hideModal,
@@ -54,7 +54,7 @@ const Issue = ({
         profile={profile}
         showModal={showModal}
         hideModal={hideModal}
-        editIssue={editIssue}
+        updateIssue={updateIssue}
         checkedIssueIdList={checkedIssueIdList}
         setCheckedIssueIdList={setCheckedIssueIdList}
         isCheckedAllCheckbox={isCheckedAllCheckbox}
@@ -67,8 +67,8 @@ const Issue = ({
 Issue.propTypes = {
   issueData: PropTypes.array,
   profile: PropTypes.object,
-  addIssue: PropTypes.func,
-  editIssue: PropTypes.func,
+  createIssue: PropTypes.func,
+  updateIssue: PropTypes.func,
   deleteIssue: PropTypes.func,
   showModal: PropTypes.func,
   hideModal: PropTypes.func,

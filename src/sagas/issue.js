@@ -1,6 +1,11 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import { fetchIssueData, createIssue } from "../utils/apiRequest";
-import { FETCH_ISSUE_REQUEST, requestIssueSuccess, CREATE_ISSUE_REQUEST } from "../actions";
+import { fetchIssueData, createIssue, updateIssue } from "../utils/apiRequest";
+import {
+  FETCH_ISSUE_REQUEST,
+  requestIssueSuccess,
+  CREATE_ISSUE_REQUEST,
+  UPDATE_ISSUE_REQUEST,
+} from "../actions";
 
 function* fetchIssueList() {
   try {
@@ -15,7 +20,16 @@ function* fetchIssueList() {
 function* createIssueItem(action) {
   try {
     yield call(createIssue, action.payload);
-    yield put({type: FETCH_ISSUE_REQUEST});
+    yield put({ type: FETCH_ISSUE_REQUEST });
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+function* updateIssueItem(action) {
+  try {
+    yield call(updateIssue, action.payload);
+    yield put({ type: FETCH_ISSUE_REQUEST });
   } catch (e) {
     console.log(e);
   }
@@ -24,4 +38,5 @@ function* createIssueItem(action) {
 export default function* issueSaga() {
   yield takeLatest(FETCH_ISSUE_REQUEST, fetchIssueList);
   yield takeLatest(CREATE_ISSUE_REQUEST, createIssueItem);
+  yield takeLatest(UPDATE_ISSUE_REQUEST, updateIssueItem);
 }

@@ -6,6 +6,7 @@ import {
   showModal,
   requestIssue,
   createIssue,
+  updateIssue
 } from "../actions";
 import { connect } from "react-redux";
 import Issue from "../components/templates/Issue";
@@ -44,6 +45,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     createIssue: (payload) => {
       dispatch(createIssue(payload));
+    },
+    updateIssue: (payload) => {
+      dispatch(updateIssue(payload));
     }
   };
 };

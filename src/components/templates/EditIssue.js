@@ -5,7 +5,7 @@ import Button from "../atoms/Button";
 import TextInput from "../atoms/TextInput";
 import TextArea from "../atoms/TextArea";
 import ErrorMessage from "../atoms/ErrorMessage";
-import { getFormatedDate, validateRequired } from "../../utils";
+import { validateRequired } from "../../utils";
 
 const Wrapper = styled.div`
   max-width: 598px;
@@ -49,13 +49,11 @@ const Footer = styled.div`
   }
 `;
 
-const EditIssue = ({ issue, hideModal, editIssue }) => {
+const EditIssue = ({ issue, hideModal, updateIssue }) => {
   const [issueState, setIssueState] = useState(issue.state);
   const [issueTitle, setIssueTitle] = useState(issue.title);
   const [issuebody, setIssuebody] = useState(issue.body);
   const [errors, setErrors] = useState({ title: "", body: "" });
-
-  const now = getFormatedDate(new Date());
 
   const onChangeStatus = (e) => {
     setIssueState(e.target.value);
@@ -74,13 +72,14 @@ const EditIssue = ({ issue, hideModal, editIssue }) => {
     }
 
     const payload = {
-      ...issue,
-      title: issueTitle,
-      status: issueState,
-      body: issuebody,
-      updatedAt: now,
+      data: {
+        title: issueTitle,
+        status: issueState,
+        body: issuebody,
+      },
+      issueNumber: issue.number
     };
-    editIssue(payload);
+    updateIssue(payload);
     hideModal();
   };
 
@@ -126,7 +125,7 @@ const EditIssue = ({ issue, hideModal, editIssue }) => {
 EditIssue.propTypes = {
   issue: PropTypes.object,
   hideModal: PropTypes.func,
-  editIssue: PropTypes.func,
+  updateIssue: PropTypes.func,
 };
 
 export default EditIssue;

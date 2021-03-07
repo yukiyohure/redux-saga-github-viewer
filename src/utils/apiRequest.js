@@ -39,6 +39,18 @@ export const createIssue = async (data) => {
   }
 }
 
+export const updateIssue = async ({data, issueNumber}) => {
+  try {
+    const response = await axiosInstance.patch(
+      `/repos/${username}/${repo}/issues/${issueNumber}`,
+      data
+    );
+    return response.data;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 export const fetchUser = async () => {
   try {
     const response = await axiosInstance.get("/user");

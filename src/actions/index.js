@@ -17,6 +17,9 @@ export const CREATE_ISSUE_FAILED = "CREATE_ISSUE_FAILED";
 export const FETCH_USER_REQUEST = "FETCH_USER_REQUEST";
 export const FETCH_USER_SUCCEEDED = "FETCH_USER_SUCCEEDED";
 export const FETCH_USER_FAILED = "FETCH_USER_FAILED";
+export const UPDATE_ISSUE_REQUEST = "UPDATE_ISSUE_REQUEST";
+export const UPDATE_ISSUE_SUCCEEDED = "UPDATE_ISSUE_SUCCEEDED";
+export const UPDATE_ISSUE_FAILED = "UPDATE_ISSUE_FAILED";
 
 export const addIssue = (newData) => {
   return {
@@ -95,9 +98,9 @@ export const requestUserFailed = (error) => {
 export const createIssue = (data) => {
   return {
     type: CREATE_ISSUE_REQUEST,
-    payload: data
+    payload: data,
   };
-}
+};
 
 export const createIssueSuccess = (data) => {
   return {
@@ -110,5 +113,26 @@ export const createIssueFailed = (error) => {
   return {
     type: CREATE_ISSUE_FAILED,
     payload: error,
+  };
+};
+
+export const updateIssue = (data) => {
+  return {
+    type: UPDATE_ISSUE_REQUEST,
+    payload: data,
+  };
+};
+
+export const updateIssueSuccess = (data) => {
+  return {
+    type: UPDATE_ISSUE_SUCCEEDED,
+    payload: data,
+  };
+};
+
+export const updateIssueFailed = (error) => {
+  return {
+    type: UPDATE_ISSUE_FAILED,
+    error: error,
   };
 };
