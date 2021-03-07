@@ -21,11 +21,9 @@ const issueReducer = (state = initialState, action) => {
 
   switch (action.type) {
     case ADD_ISSUE:
-      // 配列の要素はindex数より1少ないので周りくどいけど -1 しておく(indexに指定してもいいけどニュアンスが一致しないからやめておく)
       newData[newData.length] = { ...action.payload, id: newIndex }; // payloadにはidは設定されていない想定なのでここでidを指定してあげる。
       return { index: newIndex, data: newData };
     case EDIT_ISSUE:
-      // 配列でissueのデータを持っているので、
       newData[
         newData.findIndex((item) => {
           return item.id === action.payload.id;

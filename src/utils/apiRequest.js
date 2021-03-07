@@ -27,6 +27,18 @@ export const fetchIssueData = async (params) => {
   }
 };
 
+export const createIssue = async (data) => {
+  try {
+    const response = await axiosInstance.post(
+      `/repos/${username}/${repo}/issues`,
+      data
+    );
+    return response.data;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 export const fetchUser = async () => {
   try {
     const response = await axiosInstance.get("/user");
@@ -35,3 +47,5 @@ export const fetchUser = async () => {
     console.log(e);
   }
 };
+
+

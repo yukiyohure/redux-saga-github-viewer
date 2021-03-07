@@ -118,9 +118,9 @@ const IssueContents = ({
                   </td>
                   <td>{row.title}</td>
                   <td>{row.status}</td>
-                  <td>{row.author}</td>
-                  <td>{row.createdAt}</td>
-                  <td>{row.updatedAt}</td>
+                  <td>{row.user.login}</td>
+                  <td>{row.created_at}</td>
+                  <td>{row.updated_at}</td>
                 </TableRow>
               );
             })

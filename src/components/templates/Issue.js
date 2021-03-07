@@ -12,7 +12,7 @@ const Wrapper = styled.div`
 const Issue = ({
   issueData,
   profile,
-  addIssue,
+  createIssue,
   editIssue,
   deleteIssue,
   showModal,
@@ -41,7 +41,7 @@ const Issue = ({
       <SearchBar
         profile={profile}
         showModal={showModal}
-        addIssue={addIssue}
+        createIssue={createIssue}
         deleteIssue={deleteIssue}
         searchWord={searchWord}
         onChange={setSearchWord}

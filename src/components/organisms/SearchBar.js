@@ -21,7 +21,7 @@ const ActionButtons = styled.div`
 
 const SearchBar = ({
   profile,
-  addIssue,
+  createIssue,
   deleteIssue,
   searchWord,
   onChange,
@@ -55,7 +55,7 @@ const SearchBar = ({
             showModal({
               component: (
                 <NewIssue
-                  addIssue={addIssue}
+                  createIssue={createIssue}
                   hideModal={hideModal}
                   profile={profile}
                 />

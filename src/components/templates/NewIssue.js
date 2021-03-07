@@ -5,7 +5,7 @@ import TextArea from "../atoms/TextArea";
 import Button from "../atoms/Button";
 import PropTypes from "prop-types";
 import ErrorMessage from "../atoms/ErrorMessage";
-import { getFormatedDate, validateRequired } from "../../utils";
+import { validateRequired } from "../../utils";
 
 const Wrapper = styled.div`
   max-width: 598px;
@@ -49,13 +49,11 @@ const Footer = styled.div`
   }
 `;
 
-const NewIssue = ({ hideModal, addIssue, profile }) => {
+const NewIssue = ({ hideModal, createIssue }) => {
   const [issueTitle, setIssueTitle] = useState("");
   const [issuebody, setIssuebody] = useState("");
   // 表示するためのエラーメッセージオブジェクト。keyにあるだけの文が潜在的なエラー分の全て。
   const [errors, setErrors] = useState({ title: "", body: "" });
-
-  const now = getFormatedDate(new Date());
 
   const onSubmit = () => {
     // バリデーションは種類ごとに関数で切り分けて、拡張性を重視してみる(1種類しかないけど)
@@ -74,15 +72,11 @@ const NewIssue = ({ hideModal, addIssue, profile }) => {
       return;
     }
 
-    const payload = {
+    const issue = {
       title: issueTitle,
-      body: issuebody,
-      status: "Open",
-      author: profile.userName,
-      createdAt: now,
-      updatedAt: now,
+      body: issuebody
     };
-    addIssue(payload);
+    createIssue(issue);
     hideModal(); // issueの追加処理が終わったらモーダルを閉じる
   };
 

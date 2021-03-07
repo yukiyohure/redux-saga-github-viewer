@@ -11,6 +11,9 @@ export const HIDE_MODAL = "HIDE_MODAL";
 export const FETCH_ISSUE_REQUEST = "FETCH_ISSUE_REQUEST";
 export const FETCH_ISSUE_SUCCEEDED = "FETCH_ISSUE_SUCCEEDED";
 export const FETCH_ISSUE_FAILED = "FETCH_ISSUE_FAILED";
+export const CREATE_ISSUE_REQUEST = "CREATE_ISSUE_REQUEST";
+export const CREATE_ISSUE_SUCCEEDED = "CREATE_ISSUE_SUCCEEDED";
+export const CREATE_ISSUE_FAILED = "CREATE_ISSUE_FAILED";
 export const FETCH_USER_REQUEST = "FETCH_USER_REQUEST";
 export const FETCH_USER_SUCCEEDED = "FETCH_USER_SUCCEEDED";
 export const FETCH_USER_FAILED = "FETCH_USER_FAILED";
@@ -86,5 +89,26 @@ export const requestUserFailed = (error) => {
   return {
     type: FETCH_USER_FAILED,
     error: error,
+  };
+};
+
+export const createIssue = (data) => {
+  return {
+    type: CREATE_ISSUE_REQUEST,
+    payload: data
+  };
+}
+
+export const createIssueSuccess = (data) => {
+  return {
+    type: CREATE_ISSUE_SUCCEEDED,
+    payload: data,
+  };
+};
+
+export const createIssueFailed = (error) => {
+  return {
+    type: CREATE_ISSUE_FAILED,
+    payload: error,
   };
 };
