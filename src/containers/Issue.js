@@ -40,8 +40,8 @@ const mapDispatchToProps = (dispatch) => {
     hideModal: () => {
       dispatch(hideModal());
     },
-    requestIssue: () => {
-      dispatch(requestIssue());
+    requestIssue: (payload) => {
+      dispatch(requestIssue(payload));
     },
     createIssue: (payload) => {
       dispatch(createIssue(payload));

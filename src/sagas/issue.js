@@ -7,10 +7,10 @@ import {
   UPDATE_ISSUE_REQUEST,
 } from "../actions";
 
-function* fetchIssueList() {
+function* fetchIssueList(action) {
   try {
     // call()は第一引数にsagaで実行したい関数を指定、第二引数でその関数の引数に渡したい値を記載する
-    const issueData = yield call(fetchIssueData);
+    const issueData = yield call(fetchIssueData, action);
     yield put(requestIssueSuccess(issueData));
   } catch (e) {
     console.log(e);
@@ -20,7 +20,7 @@ function* fetchIssueList() {
 function* createIssueItem(action) {
   try {
     yield call(createIssue, action.payload);
-    yield put({ type: FETCH_ISSUE_REQUEST });
+    yield put({ type: FETCH_ISSUE_REQUEST, payload: { direction: "asc" } });
   } catch (e) {
     console.log(e);
   }
@@ -29,7 +29,7 @@ function* createIssueItem(action) {
 function* updateIssueItem(action) {
   try {
     yield call(updateIssue, action.payload);
-    yield put({ type: FETCH_ISSUE_REQUEST });
+    yield put({ type: FETCH_ISSUE_REQUEST, payload: { direction: "asc" } });
   } catch (e) {
     console.log(e);
   }

@@ -13,12 +13,14 @@ const axiosInstance = axios.create({
   },
 });
 
-export const fetchIssueData = async (params) => {
+export const fetchIssueData = async (passedParams) => {
   try {
     const response = await axiosInstance.get(
       `/repos/${username}/${repo}/issues`,
       {
-        params,
+        params: {
+          ...passedParams.payload,
+        },
       }
     );
     return response.data;
@@ -37,9 +39,9 @@ export const createIssue = async (data) => {
   } catch (e) {
     console.log(e);
   }
-}
+};
 
-export const updateIssue = async ({data, issueNumber}) => {
+export const updateIssue = async ({ data, issueNumber }) => {
   try {
     const response = await axiosInstance.patch(
       `/repos/${username}/${repo}/issues/${issueNumber}`,
@@ -49,7 +51,7 @@ export const updateIssue = async ({data, issueNumber}) => {
   } catch (e) {
     console.log(e);
   }
-}
+};
 
 export const fetchUser = async () => {
   try {
@@ -59,5 +61,3 @@ export const fetchUser = async () => {
     console.log(e);
   }
 };
-
-

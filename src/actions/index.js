@@ -55,9 +55,10 @@ export const hideModal = () => {
   };
 };
 
-export const requestIssue = () => {
+export const requestIssue = (data) => {
   return {
     type: FETCH_ISSUE_REQUEST,
+    payload: data
   };
 };
 

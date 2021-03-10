@@ -74,7 +74,7 @@ const EditIssue = ({ issue, hideModal, updateIssue }) => {
     const payload = {
       data: {
         title: issueTitle,
-        status: issueState,
+        state: issueState,
         body: issuebody,
       },
       issueNumber: issue.number

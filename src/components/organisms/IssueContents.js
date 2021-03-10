@@ -49,7 +49,6 @@ const IssueContents = ({
   setIsCheckedAllCheckbox,
 }) => {
   const allIdList = issueData?.map((item) => item.id);
-
   const onClickAllCheckbox = () => {
     setIsCheckedAllCheckbox((prevState) => {
       const newState = !prevState;

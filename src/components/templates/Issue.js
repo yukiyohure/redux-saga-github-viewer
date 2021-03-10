@@ -33,7 +33,7 @@ const Issue = ({
     // requestIssue()を実行すると、stateが変更されるので、
     // requestIssue()→state更新→requestIssue()→state更新...のように無限ループが発生してしまう。
     // その対策としてuseEffectを使ってコンポーネントのマウント時一度だけ呼ぶようにする。
-    requestIssue();
+    requestIssue({ direction: "asc" });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
