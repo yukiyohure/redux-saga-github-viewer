@@ -14,7 +14,6 @@ const Issue = ({
   profile,
   createIssue,
   updateIssue,
-  deleteIssue,
   showModal,
   hideModal,
   requestIssue,
@@ -42,7 +41,7 @@ const Issue = ({
         profile={profile}
         showModal={showModal}
         createIssue={createIssue}
-        deleteIssue={deleteIssue}
+        updateIssue={updateIssue}
         searchWord={searchWord}
         onChange={setSearchWord}
         hideModal={hideModal}
@@ -69,7 +68,6 @@ Issue.propTypes = {
   profile: PropTypes.object,
   createIssue: PropTypes.func,
   updateIssue: PropTypes.func,
-  deleteIssue: PropTypes.func,
   showModal: PropTypes.func,
   hideModal: PropTypes.func,
 };

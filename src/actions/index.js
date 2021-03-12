@@ -20,6 +20,9 @@ export const FETCH_USER_FAILED = "FETCH_USER_FAILED";
 export const UPDATE_ISSUE_REQUEST = "UPDATE_ISSUE_REQUEST";
 export const UPDATE_ISSUE_SUCCEEDED = "UPDATE_ISSUE_SUCCEEDED";
 export const UPDATE_ISSUE_FAILED = "UPDATE_ISSUE_FAILED";
+export const DELETE_ISSUE_REQUEST = "DELETE_ISSUE_REQUEST";
+export const DELETE_ISSUE_SUCCEEDED = "DELETE_ISSUE_SUCCEEDED";
+export const DELETE_ISSUE_FAILED = "DELETE_ISSUE_FAILED";
 
 export const addIssue = (newData) => {
   return {
@@ -58,7 +61,7 @@ export const hideModal = () => {
 export const requestIssue = (data) => {
   return {
     type: FETCH_ISSUE_REQUEST,
-    payload: data
+    payload: data,
   };
 };
 

@@ -48,7 +48,7 @@ const IssueContents = ({
   isCheckedAllCheckbox,
   setIsCheckedAllCheckbox,
 }) => {
-  const allIdList = issueData?.map((item) => item.id);
+  const allIdList = issueData?.map((item) => item.number);
   const onClickAllCheckbox = () => {
     setIsCheckedAllCheckbox((prevState) => {
       const newState = !prevState;
@@ -59,14 +59,16 @@ const IssueContents = ({
     });
   };
 
-  const onClickCheckbox = (e, id) => {
+  const onClickCheckbox = (e, number) => {
     e.stopPropagation();
-    if (checkedIssueIdList.includes(id)) {
+    if (checkedIssueIdList.includes(number)) {
       // checkされていた場合
-      setCheckedIssueIdList(checkedIssueIdList.filter((item) => item !== id));
+      setCheckedIssueIdList(
+        checkedIssueIdList.filter((item) => item !== number)
+      );
     } else {
       // checkされていなかった場合
-      setCheckedIssueIdList([...checkedIssueIdList, id]);
+      setCheckedIssueIdList([...checkedIssueIdList, number]);
     }
   };
   return (
@@ -110,8 +112,8 @@ const IssueContents = ({
                   <td>
                     <input
                       type="checkbox"
-                      onClick={(e) => onClickCheckbox(e, row.id)}
-                      checked={checkedIssueIdList.includes(row.id)}
+                      onClick={(e) => onClickCheckbox(e, row.number)}
+                      checked={checkedIssueIdList.includes(row.number)}
                       readOnly
                     />
                   </td>
