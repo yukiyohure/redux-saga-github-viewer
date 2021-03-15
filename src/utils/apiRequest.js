@@ -1,4 +1,23 @@
 import axios from "axios";
+import { toast } from "react-toastify";
+
+const fullfilled = (message) => {
+  toast.success(message, {
+    className: "toast-success",
+    hideProgressBar: true,
+    autoClose: false,
+    position: "top-center",
+  });
+};
+
+const failed = (message) => {
+  toast.error(message, {
+    className: "toast-error",
+    hideProgressBar: true,
+    autoClose: false,
+    position: "top-center",
+  });
+};
 
 const username = process.env.REACT_APP_USERNAME;
 const token = process.env.REACT_APP_GITHUB_ACCESS_TOKEN;
@@ -35,9 +54,11 @@ export const createIssue = async (data) => {
       `/repos/${username}/${repo}/issues`,
       data
     );
+    fullfilled("issueを作成しました");
     return response.data;
   } catch (e) {
     console.log(e);
+    failed("作成に失敗しました");
   }
 };
 
@@ -47,9 +68,11 @@ export const updateIssue = async ({ data, issueNumber }) => {
       `/repos/${username}/${repo}/issues/${issueNumber}`,
       data
     );
+    fullfilled("更新に成功しました");
     return response.data;
   } catch (e) {
     console.log(e);
+    failed("更新に失敗しました");
   }
 };
 

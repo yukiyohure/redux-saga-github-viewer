@@ -8,6 +8,8 @@ import Index from "./pages/Index.js";
 import styled from "styled-components";
 import Profile from "./containers/Profile";
 import ModalWrapper from "./containers/Modal";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ContentWrapper = styled.div`
   padding: 2rem 1rem;
@@ -31,6 +33,7 @@ function App() {
             {/* pathの検索方法が前方置換なのでexactを宣言して完全一致にしてあげる */}
           </Switch>
         </ContentWrapper>
+        <ToastContainer limit={3} />
       </div>
     </Router>
   );
