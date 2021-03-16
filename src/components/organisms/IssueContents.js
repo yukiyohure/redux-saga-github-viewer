@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { colors } from "../../variables";
 import PropTypes from "prop-types";
 import EditIssue from "../templates/EditIssue";
+import { getFormatedDate } from "../../utils";
 
 const Wrapper = styled.div`
   overflow: scroll;
@@ -94,6 +95,8 @@ const IssueContents = ({
         <tbody>
           {issueData?.length ? (
             issueData.map((row) => {
+              const created_at = getFormatedDate(row.created_at);
+              const updated_at = getFormatedDate(row.updated_at);
               return (
                 <TableRow
                   key={row.id}
@@ -120,8 +123,8 @@ const IssueContents = ({
                   <td>{row.title}</td>
                   <td>{row.status}</td>
                   <td>{row.user.login}</td>
-                  <td>{row.created_at}</td>
-                  <td>{row.updated_at}</td>
+                  <td>{created_at}</td>
+                  <td>{updated_at}</td>
                 </TableRow>
               );
             })
