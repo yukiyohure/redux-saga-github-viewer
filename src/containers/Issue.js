@@ -1,9 +1,11 @@
 import {
   addIssue,
   editIssue,
-  deleteIssue,
   hideModal,
   showModal,
+  requestIssue,
+  createIssue,
+  updateIssue,
 } from "../actions";
 import { connect } from "react-redux";
 import Issue from "../components/templates/Issue";
@@ -28,14 +30,20 @@ const mapDispatchToProps = (dispatch) => {
     editIssue: (payload) => {
       dispatch(editIssue(payload));
     },
-    deleteIssue: (payload) => {
-      dispatch(deleteIssue(payload));
-    },
     showModal: (component) => {
       dispatch(showModal(component));
     },
     hideModal: () => {
       dispatch(hideModal());
+    },
+    requestIssue: (payload) => {
+      dispatch(requestIssue(payload));
+    },
+    createIssue: (payload) => {
+      dispatch(createIssue(payload));
+    },
+    updateIssue: (payload) => {
+      dispatch(updateIssue(payload));
     },
   };
 };

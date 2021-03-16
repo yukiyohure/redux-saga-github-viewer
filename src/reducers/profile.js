@@ -1,12 +1,16 @@
+import { FETCH_USER_SUCCEEDED } from "../actions";
+
 const initialState = {
-  profileUrl:
-    "https://avatars1.githubusercontent.com/u/25723193?s=60&u=5f2d871352830fdf1a79ee285e0712044105ca91&v=4",
-  userName: "yukiyohure",
-  email: "example@mock.com",
+  data: null,
 };
 
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
+    case FETCH_USER_SUCCEEDED:
+      return {
+        ...state,
+        data: action.data,
+      };
     default:
       return state;
   }

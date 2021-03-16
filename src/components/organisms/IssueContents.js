@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { colors } from "../../variables";
 import PropTypes from "prop-types";
 import EditIssue from "../templates/EditIssue";
+import { getFormatedDate } from "../../utils";
 
 const Wrapper = styled.div`
   overflow: scroll;
@@ -42,14 +43,13 @@ const IssueContents = ({
   issueData,
   showModal,
   hideModal,
-  editIssue,
+  updateIssue,
   checkedIssueIdList,
   setCheckedIssueIdList,
   isCheckedAllCheckbox,
   setIsCheckedAllCheckbox,
 }) => {
-  const allIdList = issueData.map((item) => item.id);
-
+  const allIdList = issueData?.map((item) => item.number);
   const onClickAllCheckbox = () => {
     setIsCheckedAllCheckbox((prevState) => {
       const newState = !prevState;
@@ -60,14 +60,16 @@ const IssueContents = ({
     });
   };
 
-  const onClickCheckbox = (e, id) => {
+  const onClickCheckbox = (e, number) => {
     e.stopPropagation();
-    if (checkedIssueIdList.includes(id)) {
+    if (checkedIssueIdList.includes(number)) {
       // checkされていた場合
-      setCheckedIssueIdList(checkedIssueIdList.filter((item) => item != id));
+      setCheckedIssueIdList(
+        checkedIssueIdList.filter((item) => item !== number)
+      );
     } else {
       // checkされていなかった場合
-      setCheckedIssueIdList([...checkedIssueIdList, id]);
+      setCheckedIssueIdList([...checkedIssueIdList, number]);
     }
   };
   return (
@@ -91,8 +93,10 @@ const IssueContents = ({
           </TableRow>
         </thead>
         <tbody>
-          {issueData.length ? (
+          {issueData?.length ? (
             issueData.map((row) => {
+              const created_at = getFormatedDate(row.created_at);
+              const updated_at = getFormatedDate(row.updated_at);
               return (
                 <TableRow
                   key={row.id}
@@ -102,7 +106,7 @@ const IssueContents = ({
                         <EditIssue
                           issue={row}
                           hideModal={hideModal}
-                          editIssue={editIssue}
+                          updateIssue={updateIssue}
                         />
                       ),
                     })
@@ -111,16 +115,16 @@ const IssueContents = ({
                   <td>
                     <input
                       type="checkbox"
-                      onClick={(e) => onClickCheckbox(e, row.id)}
-                      checked={checkedIssueIdList.includes(row.id)}
+                      onClick={(e) => onClickCheckbox(e, row.number)}
+                      checked={checkedIssueIdList.includes(row.number)}
                       readOnly
                     />
                   </td>
                   <td>{row.title}</td>
                   <td>{row.status}</td>
-                  <td>{row.author}</td>
-                  <td>{row.createdAt}</td>
-                  <td>{row.updatedAt}</td>
+                  <td>{row.user.login}</td>
+                  <td>{created_at}</td>
+                  <td>{updated_at}</td>
                 </TableRow>
               );
             })
@@ -139,7 +143,7 @@ IssueContents.propTypes = {
   issueData: PropTypes.array,
   showModal: PropTypes.func,
   hideModal: PropTypes.func,
-  editIssue: PropTypes.func,
+  updateIssue: PropTypes.func,
   checkedIssueIdList: PropTypes.array,
   setCheckedIssueIdList: PropTypes.func,
   isCheckedAllCheckbox: PropTypes.bool,

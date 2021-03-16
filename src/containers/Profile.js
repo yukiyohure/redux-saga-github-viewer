@@ -1,6 +1,5 @@
-// import rootReducer from "../reducers";
 import { connect } from "react-redux";
-// import * as actions from "../actions";
+import { requestUser } from '../actions'
 import Profile from "../pages/Profile";
 
 const mapStateToProps = (state) => {
@@ -9,8 +8,12 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = () => {
-  return {};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    requestUser: () => {
+      dispatch(requestUser());
+    }
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);
