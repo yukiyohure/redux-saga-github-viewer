@@ -121,7 +121,7 @@ const IssueContents = ({
                     />
                   </td>
                   <td>
-                    <a onClick={(e) => e.stopPropagation()} href={row.htmlurl}>{row.title}</a>
+                    <a onClick={(e) => e.stopPropagation()} href={row.html_url}>{row.title}</a>
                   </td>
                   <td>{row.status}</td>
                   <td>{row.user.login}</td>
