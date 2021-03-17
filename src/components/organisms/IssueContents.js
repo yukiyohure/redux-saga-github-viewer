@@ -120,7 +120,9 @@ const IssueContents = ({
                       readOnly
                     />
                   </td>
-                  <td>{row.title}</td>
+                  <td>
+                    <a onClick={(e) => e.stopPropagation()} href={row.htmlurl}>{row.title}</a>
+                  </td>
                   <td>{row.status}</td>
                   <td>{row.user.login}</td>
                   <td>{created_at}</td>
