@@ -120,7 +120,10 @@ const IssueContents = ({
                       readOnly
                     />
                   </td>
-                  <td>{row.title}</td>
+                  <td>
+                    {/* 親要素の<td>のリスナーも発火してしまうので、stopPropagationでイベント走査を停止 */}
+                    <a onClick={(e) => e.stopPropagation() } href={row.html_url}>{row.title}</a>
+                  </td>
                   <td>{row.status}</td>
                   <td>{row.user.login}</td>
                   <td>{created_at}</td>
