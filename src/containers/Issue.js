@@ -1,6 +1,4 @@
 import {
-  addIssue,
-  editIssue,
   hideModal,
   showModal,
   requestIssue,
@@ -24,12 +22,6 @@ const mapStateToProps = (state) => {
 // この場合だと `addContents(追加したい要素)` でstoreにdispatchできるようになる
 const mapDispatchToProps = (dispatch) => {
   return {
-    addIssue: (payload) => {
-      dispatch(addIssue(payload));
-    },
-    editIssue: (payload) => {
-      dispatch(editIssue(payload));
-    },
     showModal: (component) => {
       dispatch(showModal(component));
     },
