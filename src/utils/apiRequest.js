@@ -33,12 +33,14 @@ const axiosInstance = axios.create({
 });
 
 export const fetchIssueData = async (passedParams) => {
+  const date = new Date().getTime();
   try {
     const response = await axiosInstance.get(
       `/repos/${username}/${repo}/issues`,
       {
         params: {
           ...passedParams.payload,
+          timestamp: date
         },
       }
     );
