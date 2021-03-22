@@ -29,6 +29,7 @@ const SearchBar = ({
   hideModal,
   checkedIssueIdList,
   setIsCheckedAllCheckbox,
+  setCheckedIssueIdList,
 }) => {
   const onClickDelete = () => {
     if (!window.confirm("削除しますか?")) {
@@ -40,6 +41,8 @@ const SearchBar = ({
       });
       // issueを削除した後は自動的に全件チェックボックスのチェックを外す
       setIsCheckedAllCheckbox(false);
+      // issueを削除した後はチェックされたissueのリストをリセット
+      setCheckedIssueIdList([]);
     } else if (!checkedIssueIdList.length) {
       alert("削除する issue を選択してください。");
     }
@@ -86,6 +89,7 @@ SearchBar.propTypes = {
   updateIssue: PropTypes.func,
   checkedIssueIdList: PropTypes.array,
   setIsCheckedAllCheckbox: PropTypes.func,
+  setCheckedIssueIdList: PropTypes.func,
 };
 
 export default SearchBar;

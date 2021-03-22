@@ -47,6 +47,7 @@ const Issue = ({
         hideModal={hideModal}
         checkedIssueIdList={checkedIssueIdList}
         setIsCheckedAllCheckbox={setIsCheckedAllCheckbox}
+        setCheckedIssueIdList={setCheckedIssueIdList}
       />
       <IssueContents
         issueData={filterdIssueData}
