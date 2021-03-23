@@ -95,8 +95,8 @@ const IssueContents = ({
         <tbody>
           {issueData?.length ? (
             issueData.map((row) => {
-              const created_at = getFormatedDate(row.created_at);
-              const updated_at = getFormatedDate(row.updated_at);
+              const createdAt = getFormatedDate(row.created_at);
+              const updatedAt = getFormatedDate(row.updated_at);
               return (
                 <TableRow
                   key={row.id}
@@ -121,12 +121,14 @@ const IssueContents = ({
                     />
                   </td>
                   <td>
-                    <a onClick={(e) => e.stopPropagation()} href={row.html_url}>{row.title}</a>
+                    <a onClick={(e) => e.stopPropagation()} href={row.html_url}>
+                      {row.title}
+                    </a>
                   </td>
                   <td>{row.status}</td>
                   <td>{row.user.login}</td>
-                  <td>{created_at}</td>
-                  <td>{updated_at}</td>
+                  <td>{createdAt}</td>
+                  <td>{updatedAt}</td>
                 </TableRow>
               );
             })
