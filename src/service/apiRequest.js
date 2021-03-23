@@ -27,20 +27,20 @@ const repo = process.env.REACT_APP_GITHUB_REPO;
 const axiosInstance = axios.create({
   baseURL: "https://api.github.com",
   auth: {
-    username: username,
+    username,
     password: token,
   },
 });
 
 export const fetchIssueData = async (passedParams) => {
-  const date = new Date().getTime();
+  const timestamp = new Date().getTime();
   try {
     const response = await axiosInstance.get(
       `/repos/${username}/${repo}/issues`,
       {
         params: {
           ...passedParams.payload,
-          timestamp: date
+          timestamp,
         },
       }
     );
