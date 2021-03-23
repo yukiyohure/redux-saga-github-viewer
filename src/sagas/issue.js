@@ -1,5 +1,5 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import { fetchIssueData, createIssue, updateIssue } from "../utils/apiRequest";
+import { fetchIssueData, createIssue, updateIssue } from "../service/apiRequest";
 import {
   FETCH_ISSUE_REQUEST,
   requestIssueSuccess,

@@ -1,5 +1,5 @@
 import { put, call, takeLatest } from "redux-saga/effects";
-import { fetchUser } from "../utils/apiRequest";
+import { fetchUser } from "../service/apiRequest";
 import { FETCH_USER_REQUEST, requestUserSuccess } from "../actions";
 
 function* fetchUserData() {
