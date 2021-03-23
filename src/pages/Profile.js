@@ -43,8 +43,14 @@ const Profile = ({ user, requestUser }) => {
   }, [requestUser]);
 
   const userData = user.data;
-  // Profileページでリロードされるとpromiseから返ってくるのを待たずに値を参照しようとしてundifined→エラーになる
-  // ので、optional chaining で値がまだ入っていない時はundefinedのままで、エラーが発生しないようにする。
+
+  // Profileページでリロードされるとpromiseから返ってくるのを待たずにundifinedから値を参照しようとしてundifined→エラーになる
+  // そのため存在チェックを先に行っておく
+  if (!userData) {
+    // 実務ではこのフラグメントの部分にローダーやプレースホルダーを入れたりする
+    return <></>;
+  }
+
   return (
     <ProfileWrapper>
       <h1>Profile</h1>
@@ -52,35 +58,37 @@ const Profile = ({ user, requestUser }) => {
         <ProfilePicture>
           <Label>プロフィール</Label>
           <ProfileItem>
-            <img src={userData?.avatar_url} alt="profile" />
+            <img src={userData.avatar_url} alt="profile" />
           </ProfileItem>
         </ProfilePicture>
         <ProfileInformation>
           <div>
             <Label>ユーザー名</Label>
-            <ProfileItem>{userData?.name}</ProfileItem>
+            <ProfileItem>{userData.name}</ProfileItem>
           </div>
           <div>
             <Label>アカウントURL</Label>
             <ProfileItem>
-              <a target="_blank" rel="noreferrer" href={userData?.html_url}>{userData?.html_url}</a>
+              <a target="_blank" rel="noreferrer" href={userData.html_url}>
+                {userData.html_url}
+              </a>
             </ProfileItem>
           </div>
           <div>
             <Label>フォロー数</Label>
-            <ProfileItem>{userData?.following}</ProfileItem>
+            <ProfileItem>{userData.following}</ProfileItem>
           </div>
           <div>
             <Label>フォロワー数</Label>
-            <ProfileItem>{userData?.followers}</ProfileItem>
+            <ProfileItem>{userData.followers}</ProfileItem>
           </div>
           <div>
             <Label>パブリックレポジトリ数</Label>
-            <ProfileItem>{userData?.public_repos}</ProfileItem>
+            <ProfileItem>{userData.public_repos}</ProfileItem>
           </div>
           <div>
             <Label>プライベートリポジトリ数</Label>
-            <ProfileItem>{userData?.owned_private_repos}</ProfileItem>
+            <ProfileItem>{userData.owned_private_repos}</ProfileItem>
           </div>
         </ProfileInformation>
       </ProfileContainer>
