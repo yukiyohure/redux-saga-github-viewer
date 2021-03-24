@@ -1,23 +1,4 @@
 import axios from "axios";
-import { toast } from "react-toastify";
-
-const fullfilled = (message) => {
-  toast.success(message, {
-    className: "toast-success",
-    hideProgressBar: true,
-    autoClose: false,
-    position: "top-center",
-  });
-};
-
-const failed = (message) => {
-  toast.error(message, {
-    className: "toast-error",
-    hideProgressBar: true,
-    autoClose: false,
-    position: "top-center",
-  });
-};
 
 const username = process.env.REACT_APP_USERNAME;
 const token = process.env.REACT_APP_GITHUB_ACCESS_TOKEN;
@@ -34,55 +15,50 @@ const axiosInstance = axios.create({
 
 export const fetchIssueData = async (passedParams) => {
   const timestamp = new Date().getTime();
-  try {
-    const response = await axiosInstance.get(
-      `/repos/${username}/${repo}/issues`,
-      {
-        params: {
-          ...passedParams.payload,
-          timestamp,
-        },
-      }
-    );
-    return response.data;
-  } catch (e) {
-    console.log(e);
+  let response = await axiosInstance.get(`/repos/${username}/${repo}/issues`, {
+    params: {
+      ...passedParams.payload,
+      timestamp,
+    },
+  });
+
+  if (typeof response === "string") {
+    throw new Error("一覧の取得に失敗しました");
   }
+  return response.data;
 };
 
 export const createIssue = async (data) => {
-  try {
-    const response = await axiosInstance.post(
-      `/repos/${username}/${repo}/issues`,
-      data
-    );
-    fullfilled("issueを作成しました");
-    return response.data;
-  } catch (e) {
-    console.log(e);
-    failed("作成に失敗しました");
+  const response = await axiosInstance.post(
+    `/repos/${username}/${repo}/issues`,
+    data
+  );
+
+  if (typeof response === "string") {
+    throw new Error("作成に失敗しました");
   }
+  return response.data;
 };
 
 export const updateIssue = async ({ data, issueNumber }) => {
-  try {
-    const response = await axiosInstance.patch(
-      `/repos/${username}/${repo}/issues/${issueNumber}`,
-      data
-    );
-    fullfilled("更新に成功しました");
-    return response.data;
-  } catch (e) {
-    console.log(e);
-    failed("更新に失敗しました");
+  const response = await axiosInstance.patch(
+    `/repos/${username}/${repo}/issues/${issueNumber}`,
+    data
+  );
+
+  if (typeof response === "string") {
+    throw new Error("更新に失敗しました");
   }
+
+  return response.data;
 };
 
 export const fetchUser = async () => {
-  try {
-    const response = await axiosInstance.get("/user");
-    return response.data;
-  } catch (e) {
-    console.log(e);
+  const response = await axiosInstance.get("/user");
+
+  if (typeof response === "string") {
+    throw new Error("ユーザー情報の取得に失敗しました");
   }
+
+  return response.data;
 };
