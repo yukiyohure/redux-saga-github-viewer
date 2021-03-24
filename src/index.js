@@ -4,14 +4,24 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom'; // ルーティングに必要なRouterコンポーネントをimport
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import rootReducers from './reducers';
 import { Provider } from 'react-redux';
+import { composeWithDevTools } from "redux-devtools-extension";
+
+import createSagaMiddleWare from "redux-saga";
+import rootSaga from "./sagas";
+
+const sagaMiddleWare = createSagaMiddleWare();
 
 const store = createStore(
   rootReducers,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() // devツール表示のための記述。
+  composeWithDevTools(
+    applyMiddleware(sagaMiddleWare),
+  )
 );
+
+sagaMiddleWare.run(rootSaga);
 
 ReactDOM.render(
   <React.StrictMode>

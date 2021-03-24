@@ -21,22 +21,30 @@ const ActionButtons = styled.div`
 
 const SearchBar = ({
   profile,
-  addIssue,
-  deleteIssue,
+  createIssue,
+  updateIssue,
   searchWord,
   onChange,
   showModal,
   hideModal,
   checkedIssueIdList,
   setIsCheckedAllCheckbox,
+  setCheckedIssueIdList,
 }) => {
   const onClickDelete = () => {
+    if (!window.confirm("削除しますか?")) {
+      return;
+    }
     if (checkedIssueIdList.length) {
-      checkedIssueIdList.forEach((id) => {
-        deleteIssue(id);
+      checkedIssueIdList.forEach((number) => {
+        updateIssue({ data: { state: "closed" }, issueNumber: number });
       });
       // issueを削除した後は自動的に全件チェックボックスのチェックを外す
       setIsCheckedAllCheckbox(false);
+      // issueを削除した後はチェックされたissueのリストをリセット
+      setCheckedIssueIdList([]);
+    } else if (!checkedIssueIdList.length) {
+      alert("削除する issue を選択してください。");
     }
   };
   return (
@@ -55,7 +63,7 @@ const SearchBar = ({
             showModal({
               component: (
                 <NewIssue
-                  addIssue={addIssue}
+                  createIssue={createIssue}
                   hideModal={hideModal}
                   profile={profile}
                 />
@@ -78,9 +86,10 @@ SearchBar.propTypes = {
   showModal: PropTypes.func,
   hideModal: PropTypes.func,
   addIssue: PropTypes.func,
-  deleteIssue: PropTypes.func,
+  updateIssue: PropTypes.func,
   checkedIssueIdList: PropTypes.array,
   setIsCheckedAllCheckbox: PropTypes.func,
+  setCheckedIssueIdList: PropTypes.func,
 };
 
 export default SearchBar;

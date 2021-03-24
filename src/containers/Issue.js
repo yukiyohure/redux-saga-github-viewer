@@ -1,9 +1,9 @@
 import {
-  addIssue,
-  editIssue,
-  deleteIssue,
   hideModal,
   showModal,
+  requestIssue,
+  createIssue,
+  updateIssue,
 } from "../actions";
 import { connect } from "react-redux";
 import Issue from "../components/templates/Issue";
@@ -22,20 +22,20 @@ const mapStateToProps = (state) => {
 // この場合だと `addContents(追加したい要素)` でstoreにdispatchできるようになる
 const mapDispatchToProps = (dispatch) => {
   return {
-    addIssue: (payload) => {
-      dispatch(addIssue(payload));
-    },
-    editIssue: (payload) => {
-      dispatch(editIssue(payload));
-    },
-    deleteIssue: (payload) => {
-      dispatch(deleteIssue(payload));
-    },
     showModal: (component) => {
       dispatch(showModal(component));
     },
     hideModal: () => {
       dispatch(hideModal());
+    },
+    requestIssue: (payload) => {
+      dispatch(requestIssue(payload));
+    },
+    createIssue: (payload) => {
+      dispatch(createIssue(payload));
+    },
+    updateIssue: (payload) => {
+      dispatch(updateIssue(payload));
     },
   };
 };

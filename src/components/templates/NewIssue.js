@@ -5,7 +5,7 @@ import TextArea from "../atoms/TextArea";
 import Button from "../atoms/Button";
 import PropTypes from "prop-types";
 import ErrorMessage from "../atoms/ErrorMessage";
-import { getFormatedDate, validateRequired } from "../../utils";
+import { validateRequired } from "../../utils";
 
 const Wrapper = styled.div`
   max-width: 598px;
@@ -49,13 +49,11 @@ const Footer = styled.div`
   }
 `;
 
-const NewIssue = ({ hideModal, addIssue, profile }) => {
+const NewIssue = ({ hideModal, createIssue }) => {
   const [issueTitle, setIssueTitle] = useState("");
-  const [issueDescription, setIssueDescription] = useState("");
+  const [issuebody, setIssuebody] = useState("");
   // 表示するためのエラーメッセージオブジェクト。keyにあるだけの文が潜在的なエラー分の全て。
-  const [errors, setErrors] = useState({ title: "", description: "" });
-
-  const now = getFormatedDate(new Date());
+  const [errors, setErrors] = useState({ title: "", body: "" });
 
   const onSubmit = () => {
     // バリデーションは種類ごとに関数で切り分けて、拡張性を重視してみる(1種類しかないけど)
@@ -63,26 +61,22 @@ const NewIssue = ({ hideModal, addIssue, profile }) => {
       issueTitle,
       "タイトルを入力してください"
     );
-    const descriptionError = validateRequired(
-      issueDescription,
+    const bodyError = validateRequired(
+      issuebody,
       "説明を入力してください"
     );
 
     // エラーがあった場合は早期リターンでdispatchさせない
-    if (titleError || descriptionError) {
-      setErrors({ title: titleError, description: descriptionError });
+    if (titleError || bodyError) {
+      setErrors({ title: titleError, body: bodyError });
       return;
     }
 
-    const payload = {
+    const issue = {
       title: issueTitle,
-      description: issueDescription,
-      status: "Open",
-      author: profile.userName,
-      createdAt: now,
-      updatedAt: now,
+      body: issuebody
     };
-    addIssue(payload);
+    createIssue(issue);
     hideModal(); // issueの追加処理が終わったらモーダルを閉じる
   };
 
@@ -101,14 +95,14 @@ const NewIssue = ({ hideModal, addIssue, profile }) => {
           <FieldLabel>説明</FieldLabel>
           <TextArea
             placeholder="説明を入力してください"
-            onChange={setIssueDescription}
+            onChange={setIssuebody}
           />
         </Field>
       </InputSection>
       <MessageContainer>
         {errors.title && <ErrorMessage message={errors.title}></ErrorMessage>}
-        {errors.description && (
-          <ErrorMessage message={errors.description}></ErrorMessage>
+        {errors.body && (
+          <ErrorMessage message={errors.body}></ErrorMessage>
         )}
       </MessageContainer>
       <Footer>

@@ -5,7 +5,7 @@ import Button from "../atoms/Button";
 import TextInput from "../atoms/TextInput";
 import TextArea from "../atoms/TextArea";
 import ErrorMessage from "../atoms/ErrorMessage";
-import { getFormatedDate, validateRequired } from "../../utils";
+import { validateRequired } from "../../utils";
 
 const Wrapper = styled.div`
   max-width: 598px;
@@ -49,13 +49,11 @@ const Footer = styled.div`
   }
 `;
 
-const EditIssue = ({ issue, hideModal, editIssue }) => {
-  const [issueState, setIssueState] = useState(issue.status);
+const EditIssue = ({ issue, hideModal, updateIssue }) => {
+  const [issueState, setIssueState] = useState(issue.state);
   const [issueTitle, setIssueTitle] = useState(issue.title);
-  const [issueDescription, setIssueDescription] = useState(issue.description);
-  const [errors, setErrors] = useState({ title: "", description: "" });
-
-  const now = getFormatedDate(new Date());
+  const [issuebody, setIssuebody] = useState(issue.body);
+  const [errors, setErrors] = useState({ title: "", body: "" });
 
   const onChangeStatus = (e) => {
     setIssueState(e.target.value);
@@ -66,24 +64,22 @@ const EditIssue = ({ issue, hideModal, editIssue }) => {
       issueTitle,
       "タイトルを入力してください"
     );
-    const descriptionError = validateRequired(
-      issueDescription,
-      "説明を入力してください"
-    );
+    const bodyError = validateRequired(issuebody, "説明を入力してください");
 
-    if (titleError || descriptionError) {
-      setErrors({ title: titleError, description: descriptionError });
+    if (titleError || bodyError) {
+      setErrors({ title: titleError, body: bodyError });
       return;
     }
 
     const payload = {
-      ...issue,
-      title: issueTitle,
-      status: issueState,
-      description: issueDescription,
-      updatedAt: now,
+      data: {
+        title: issueTitle,
+        state: issueState,
+        body: issuebody,
+      },
+      issueNumber: issue.number
     };
-    editIssue(payload);
+    updateIssue(payload);
     hideModal();
   };
 
@@ -103,22 +99,20 @@ const EditIssue = ({ issue, hideModal, editIssue }) => {
           <FieldLabel>説明</FieldLabel>
           <TextArea
             placeholder="説明を入力してください"
-            value={issueDescription}
-            onChange={setIssueDescription}
+            value={issuebody}
+            onChange={setIssuebody}
           />
         </Field>
         <Field>
           <select value={issueState} onChange={onChangeStatus}>
-            <option value="Open">Open</option>
-            <option value="Close">Close</option>
+            <option value="open">Open</option>
+            <option value="closed">Closed</option>
           </select>
         </Field>
       </InputSection>
       <MessageContainer>
         {errors.title && <ErrorMessage message={errors.title}></ErrorMessage>}
-        {errors.description && (
-          <ErrorMessage message={errors.description}></ErrorMessage>
-        )}
+        {errors.body && <ErrorMessage message={errors.body}></ErrorMessage>}
       </MessageContainer>
       <Footer>
         <Button styleType="primary" label="更新" onClick={onSubmit} />
@@ -131,7 +125,7 @@ const EditIssue = ({ issue, hideModal, editIssue }) => {
 EditIssue.propTypes = {
   issue: PropTypes.object,
   hideModal: PropTypes.func,
-  editIssue: PropTypes.func,
+  updateIssue: PropTypes.func,
 };
 
 export default EditIssue;
