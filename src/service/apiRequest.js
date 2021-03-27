@@ -29,36 +29,34 @@ export const fetchIssueData = async (passedParams) => {
 };
 
 export const createIssue = async (data) => {
-  const response = await axiosInstance.post(
-    `/repos/${username}/${repo}/issues`,
-    data
-  );
-
-  if (typeof response === "string") {
+  try {
+    const response = await axiosInstance.post(
+      `/repos/${username}/${repo}/issues`,
+      data
+    );
+    return response.data;
+  } catch (e) {
     throw new Error("作成に失敗しました");
   }
-  return response.data;
 };
 
 export const updateIssue = async ({ data, issueNumber }) => {
-  const response = await axiosInstance.patch(
-    `/repos/${username}/${repo}/issues/${issueNumber}`,
-    data
-  );
-
-  if (typeof response === "string") {
+  try {
+    const response = await axiosInstance.patch(
+      `/repos/${username}/${repo}/issues/${issueNumber}`,
+      data
+    );
+    return response.data;
+  } catch (error) {
     throw new Error("更新に失敗しました");
   }
-
-  return response.data;
 };
 
 export const fetchUser = async () => {
-  const response = await axiosInstance.get("/user");
-
-  if (typeof response === "string") {
+  try {
+    const response = await axiosInstance.get("/user");
+    return response.data;
+  } catch (error) {
     throw new Error("ユーザー情報の取得に失敗しました");
   }
-
-  return response.data;
 };
