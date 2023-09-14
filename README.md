@@ -1,17 +1,17 @@
 # redux-saga-github-viewer
 
-## どんなアプリ？
-Githubリポジトリにあるissueなどを一覧化し、編集もできるアプリ。
+## What is this?
+An application that lists issues and other information in Github repositories and also allows editing.
 
-## なんで作ったの？
-主に以下技術の学習のため
+## Why I created this？
+Mainly for learning the following technologies
 
-- React,js:JSで作られた、コアの機能として差分検出をトリガーにUIの更新を行うライブラリ
-- Redux:状態管理のフレームワーク
-- Redux-Saga:Reduxを用いたプロジェクトで副作用のある状態の更新を可能にするライブラリ
+- React
+- Redux
+- Redux-Saga
 
 ## tech
-- React,js
+- React.js
 - Redux
 - redux-Saga
 - styled-components
